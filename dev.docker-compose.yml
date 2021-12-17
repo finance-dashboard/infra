@@ -1,0 +1,14 @@
+services:
+  provider-stocks:
+    image: docker.io/iskorotkov/finance-dashboard-provider-stocks:v0.1.0-dev
+    environment:
+      TOKEN: <use your token here>
+      TICKERS: TCSG;YNDX;SBER;TSLA;MOEX
+    ports:
+      - "8081:8081"
+  frontend:
+    image: docker.io/iskorotkov/finance-dashboard-frontend:v0.1.0-dev
+    environment:
+      REACT_APP_PROVIDERS: Stocks 1=ws://localhost:8081/api/v1/stocks;Stocks 2=ws://localhost:8081/api/v1/stocks;Stocks 3=ws://localhost:8081/api/v1/stocks
+    ports:
+      - "3000:3000"
