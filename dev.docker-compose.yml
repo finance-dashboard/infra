@@ -5,7 +5,8 @@ services:
       TOKEN: <use your token here>
       TICKERS: TCSG;YNDX;SBER;TSLA;MOEX
     ports:
-      - "8081:8081"
+      - "8081:8081" # For http requests from frontend.
+      - "8082:8082" # For GRPC requests from prediction service.
   frontend:
     image: docker.io/iskorotkov/finance-dashboard-frontend:v0.1.0-dev
     environment:
