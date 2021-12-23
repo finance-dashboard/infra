@@ -13,3 +13,14 @@ services:
       REACT_APP_PROVIDERS: Stocks 1=ws://localhost:8081/api/v1/stocks;Stocks 2=ws://localhost:8081/api/v1/stocks;Stocks 3=ws://localhost:8081/api/v1/stocks
     ports:
       - "3000:3000"
+  provider-crypto:
+    image: docker.io/korpatiy/finance-dashboard-provider-crypto:v0.1.0-dev
+    environment:
+      CRYPTO_KEY: <api key>
+      CRYPTO_URI: https://api.coinbase.com/v2
+      CRYPTO_DELAY: 10000
+      CRYPTO_GRPC_PORT: 9092
+      CRYPTO_PORT: 9091
+    ports:
+      - "9091:9091" 
+
