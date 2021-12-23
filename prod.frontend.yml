@@ -22,9 +22,9 @@ spec:
             - name: NODE_ENV
               value: production
             - name: REACT_APP_PROVIDERS
-              value: Stocks=ws://34.118.109.70:8081/api/v1/stocks;Stocks (foreign)=ws://34.118.109.70:8081/api/v1/stocks;Crypto=ws://1.2.3.4/api/v1/coins
+              value: Stocks=ws://34.118.80.181/stocks/api/v1/stocks;Stocks (foreign)=ws://34.118.80.181/stocks-foreign/api/v1/stocks;Crypto=ws://34.118.80.181/crypto/api/v1/coins
             - name: REACT_APP_PREDICTION_SERVICE
-              value: http://34.116.134.151:5000
+              value: http://34.118.80.181/scheduler
           ports:
             - containerPort: 3000
 ---
