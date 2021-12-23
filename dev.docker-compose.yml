@@ -18,7 +18,7 @@ services:
     image: docker.io/iskorotkov/finance-dashboard-frontend:v0.1.0-dev
     environment:
       NODE_ENV: production
-      REACT_APP_PROVIDERS: Stocks 1=ws://localhost:8081/api/v1/stocks;Stocks 2=ws://localhost:8081/api/v1/stocks;Stocks 3=ws://localhost:8081/api/v1/stocks
+      REACT_APP_PROVIDERS: Stocks=ws://localhost:8081/api/v1/stocks;Crypto=ws://localhost:9091/api/v1/coins
       REACT_APP_PREDICTION_SERVICE: http://localhost:5000
     ports:
       - "3000:3000"
