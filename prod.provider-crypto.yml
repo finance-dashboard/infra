@@ -36,7 +36,7 @@ spec:
             - name: CRYPTO_PORT
               value: "9091"
             - name: CRYPTO_COINS
-              value: "btc;eth;bnb;usdt;sol"
+              value: "btc;eth;ada;usdt;sol"
             - name: CRYPTO_COINBASE_KEY
               valueFrom:
                 secretKeyRef:

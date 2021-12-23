@@ -90,7 +90,7 @@ spec:
             - name: REDIS_PORT
               value: "6379"
             - name: PROVIDER_CONNS
-              value: provider-stocks:8082=TCSG,YNDX,SBER,MOEX,MAGN,NLMK;provider-stocks-foreign:8082=TSLA,AMD,NVDA,PFE,AAPL,MSFT;provider-crypto:9092=BTC-USD,ETH-USD,XRM-USD,BTC-RUB,ETH-RUB,XRM-RUB
+              value: provider-stocks:8082=TCSG,YNDX,SBER,MOEX,MAGN,NLMK;provider-stocks-foreign:8082=TSLA,AMD,NVDA,PFE,AAPL,MSFT;provider-crypto:9092=BTC,ETH,ADA,USDT,SOL
           ports:
             - containerPort: 5000
 ---

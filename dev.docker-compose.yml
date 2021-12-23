@@ -3,7 +3,7 @@ x-redis-env: &redis-env
   REDIS_PORT: 6379
 
 x-grpc-env: &grpc-env
-  PROVIDER_CONNS: provider-stocks:8082=TCSG,YNDX,SBER,TSLA,MOEX;provider-crypto:9092=BTC-USD,ETH-USD,XRM-USD,BTC-RUB,ETH-RUB,XRM-RUB;provider-dummy:50000=dummy
+  PROVIDER_CONNS: provider-stocks:8082=TCSG,YNDX,SBER,TSLA,MOEX;provider-crypto:9092=BTC,ETH,ADA,USDT,SOL;provider-dummy:50000=dummy
 
 services:
   provider-stocks:
