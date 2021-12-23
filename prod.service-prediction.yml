@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: chaos-app
+  labels:
+    app: redis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: docker.io/library/redis:6.2
+          ports:
+            - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: chaos-app
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: chaos-app
+  labels:
+    app: worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+        - name: worker
+          image: docker.io/mkls0/prediction-service:0.1
+          command: ["python"]
+          args: ["/app/worker.py"]
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler
+  namespace: chaos-app
+  labels:
+    app: scheduler
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: scheduler
+  template:
+    metadata:
+      labels:
+        app: scheduler
+    spec:
+      containers:
+        - name: scheduler
+          image: docker.io/mkls0/prediction-service:0.1
+          command: ["python"]
+          args: ["/app/scheduler.py"]
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: STOCKS_HOST
+              value: provider-stocks
+            - name: STOCKS_PORT
+              value: "8082"
+            - name: STOCKS_CODES
+              value: TCSG;YNDX;SBER;TSLA;MOEX
+            - name: CRYPTO_HOST
+              value: provider-crypto
+            - name: CRYPTO_PORT
+              value: "9092"
+            - name: CRYPTO_CODES
+              value: BTC-USD;ETH-USD;XRM-USD;BTC-RUB;ETH-RUB;XRM-RUB
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheduler
+  namespace: chaos-app
+spec:
+  selector:
+    app: scheduler
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer

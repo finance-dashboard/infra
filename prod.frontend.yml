@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: chaos-app
+  labels:
+    app: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: docker.io/iskorotkov/finance-dashboard-frontend:v0.1.1-dev
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: REACT_APP_PROVIDERS
+              value: Stocks=ws://34.118.109.70:8081/api/v1/stocks
+            - name: REACT_APP_PREDICTION_SERVICE
+              value: http://34.116.134.151:5000
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: chaos-app
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
