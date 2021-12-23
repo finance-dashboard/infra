@@ -28,6 +28,7 @@ services:
     environment:
       NODE_ENV: production
       REACT_APP_PROVIDERS: Stocks 1=ws://localhost:8081/api/v1/stocks;Stocks 2=ws://localhost:8081/api/v1/stocks;Stocks 3=ws://localhost:8081/api/v1/stocks
+      REACT_APP_PREDICTION_SERVICE: http://localhost:5000
     ports:
       - "3000:3000"
   provider-crypto:
