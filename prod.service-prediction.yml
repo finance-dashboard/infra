@@ -89,18 +89,8 @@ spec:
               value: redis
             - name: REDIS_PORT
               value: "6379"
-            - name: STOCKS_HOST
-              value: provider-stocks
-            - name: STOCKS_PORT
-              value: "8082"
-            - name: STOCKS_CODES
-              value: TCSG;YNDX;SBER;TSLA;MOEX
-            - name: CRYPTO_HOST
-              value: provider-crypto
-            - name: CRYPTO_PORT
-              value: "9092"
-            - name: CRYPTO_CODES
-              value: BTC-USD;ETH-USD;XRM-USD;BTC-RUB;ETH-RUB;XRM-RUB
+            - name: PROVIDER_CONNS
+              value: provider-stocks:8082=TCSG,YNDX,SBER,TSLA,MOEX;provider-crypto:9092=BTC-USD,ETH-USD,XRM-USD,BTC-RUB,ETH-RUB,XRM-RUB
           ports:
             - containerPort: 5000
 ---
