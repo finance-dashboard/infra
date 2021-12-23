@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: ingress-financial-dashboard
+  namespace: chaos-app
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: stocks-foreign
+            port:
+              number: 8081
+        path: /stocks-foreign(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: stocks
+            port:
+              number: 8081
+        path: /stocks(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: scheduler
+            port:
+              number: 5000
+        path: /scheduler(/|$)(.*)
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /*
+        pathType: Prefix
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-financial-dashboard-frontend
+  namespace: chaos-app
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
