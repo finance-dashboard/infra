@@ -15,7 +15,7 @@ services:
       - "8081:8081" # For http requests from frontend.
       - "8082:8082" # For GRPC requests from prediction service.
   frontend:
-    image: docker.io/iskorotkov/finance-dashboard-frontend:v0.1.2-dev
+    image: docker.io/iskorotkov/finance-dashboard-frontend:v0.1.3-dev
     environment:
       NODE_ENV: production
       REACT_APP_PROVIDERS: Stocks=ws://localhost:8081/api/v1/stocks;Crypto=ws://localhost:9091/api/v1/coins
