@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: provider-stocks
-          image: docker.io/iskorotkov/finance-dashboard-provider-stocks:v0.1.0-dev
+          image: docker.io/iskorotkov/finance-dashboard-provider-stocks:v0.1.1-dev
           env:
             - name: TICKERS
               value: TCSG;YNDX;SBER;MOEX;MAGN;NLMK
@@ -76,7 +76,7 @@ spec:
     spec:
       containers:
         - name: provider-stocks
-          image: docker.io/iskorotkov/finance-dashboard-provider-stocks:v0.1.0-dev
+          image: docker.io/iskorotkov/finance-dashboard-provider-stocks:v0.1.1-dev
           env:
             - name: TICKERS
               value: TSLA;AMD;NVDA;PFE;AAPL;MSFT
