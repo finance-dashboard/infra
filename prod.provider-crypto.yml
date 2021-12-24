@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: provider-crypto
-          image: docker.io/korpatiy/finance-dashboard-provider-crypto:v0.3.3-dev
+          image: docker.io/korpatiy/finance-dashboard-provider-crypto:v0.3.5-dev
           env:
             - name: CRYPTO_DELAY
               value: "11000"
